@@ -6,7 +6,6 @@ from django.db import models
 def get_upload_path(instance, filename):
     return f'products/{instance.slug}' + '.' + filename.split('.')[-1]
 
-
 class Product(models.Model):
     brand = models.CharField(max_length=50)
     model = models.CharField(max_length=50)
@@ -42,8 +41,12 @@ class Product(models.Model):
     
 class OrderItem(models.Model):
     slug = models.CharField(max_length=200, null=True)
-    size = models.CharField(max_length=4)
+    size = models.CharField(max_length=4, null=True)
     price = models.IntegerField()
+    
+    
+    def __str__(self):
+        return self.slug
 
 
 class Order(models.Model):
@@ -56,9 +59,12 @@ class Order(models.Model):
     city = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
     #Order Items
-    # items = models.ManyToManyField(OrderItem)
     item = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
     #Payment
     payment_type = models.CharField(max_length=4)
     total_price = models.IntegerField()     
     time_created = models.DateTimeField(auto_now_add=True)
+    
+    
+    def __str__(self):
+        return f'{self.email} |  ${self.total_price}'

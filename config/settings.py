@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import dj_database_url
 load_dotenv()
 
 
@@ -65,6 +66,8 @@ DATABASES = {
         'PORT': os.getenv('DB_PORT'),
     }
 }
+
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {

@@ -6,7 +6,6 @@ from .models import Product, Order, OrderItem
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         image = serializers.ImageField()
-
         
         model = Product
         fields = ['id', 'brand', 'model', 'color', 'category', 'slug',
@@ -28,12 +27,11 @@ class ProductSerializer(serializers.ModelSerializer):
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
-        fields = '__all__'
+        fields = ['slug', 'size', 'price']
 
     
 class CreateOrderSerializer(serializers.ModelSerializer):
     item = OrderItemSerializer()
-
     
     class Meta:
         model = Order
@@ -51,6 +49,7 @@ class CreateOrderSerializer(serializers.ModelSerializer):
 
         order = Order.objects.create(**validated_data)
         order.item = order_item
+        order.save()
         
         return order    
     
