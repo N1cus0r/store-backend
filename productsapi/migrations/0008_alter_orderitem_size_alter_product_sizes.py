@@ -5,20 +5,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0007_orderitem_remove_order_products_alter_product_color_and_more'),
+        (
+            "productsapi",
+            "0007_orderitem_remove_order_products_alter_product_color_and_more",
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='orderitem',
-            name='size',
+            model_name="orderitem",
+            name="size",
             field=models.CharField(max_length=4),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='sizes',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.CharField(max_length=4), null=True, size=None),
+            model_name="product",
+            name="sizes",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.CharField(max_length=4), null=True, size=None
+            ),
         ),
     ]

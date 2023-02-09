@@ -5,30 +5,47 @@ import productsapi.models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Product',
+            name="Product",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('brand', models.CharField(max_length=50)),
-                ('model', models.CharField(max_length=100)),
-                ('category', models.CharField(max_length=50)),
-                ('subcategory', models.CharField(max_length=50)),
-                ('sex', models.CharField(max_length=5)),
-                ('price', models.IntegerField()),
-                ('image', models.ImageField(upload_to=productsapi.models.get_upload_path)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("brand", models.CharField(max_length=50)),
+                ("model", models.CharField(max_length=100)),
+                ("category", models.CharField(max_length=50)),
+                ("subcategory", models.CharField(max_length=50)),
+                ("sex", models.CharField(max_length=5)),
+                ("price", models.IntegerField()),
+                (
+                    "image",
+                    models.ImageField(upload_to=productsapi.models.get_upload_path),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='ProductDetails',
+            name="ProductDetails",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
             ],
         ),
     ]

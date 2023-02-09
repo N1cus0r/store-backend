@@ -1,2 +1,6 @@
 .env
 /venv
+/.pytest_cache
+/htmlcov
+.coverage*
+pytest*

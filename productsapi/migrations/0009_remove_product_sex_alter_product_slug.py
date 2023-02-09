@@ -4,19 +4,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0008_alter_orderitem_size_alter_product_sizes'),
+        ("productsapi", "0008_alter_orderitem_size_alter_product_sizes"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='product',
-            name='sex',
+            model_name="product",
+            name="sex",
         ),
         migrations.AlterField(
-            model_name='product',
-            name='slug',
+            model_name="product",
+            name="slug",
             field=models.CharField(max_length=200, null=True),
         ),
     ]

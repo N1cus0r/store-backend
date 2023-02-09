@@ -6,19 +6,25 @@ import productsapi.models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0002_product_color_product_slug_alter_product_model'),
+        ("productsapi", "0002_product_color_product_slug_alter_product_model"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='product',
-            name='subcategory',
+            model_name="product",
+            name="subcategory",
         ),
         migrations.AlterField(
-            model_name='product',
-            name='image',
-            field=models.ImageField(upload_to=productsapi.models.get_upload_path, validators=[django.core.validators.FileExtensionValidator(['png', 'jpg', 'jpeg'])]),
+            model_name="product",
+            name="image",
+            field=models.ImageField(
+                upload_to=productsapi.models.get_upload_path,
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        ["png", "jpg", "jpeg"]
+                    )
+                ],
+            ),
         ),
     ]

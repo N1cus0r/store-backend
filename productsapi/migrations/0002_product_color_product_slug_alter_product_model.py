@@ -4,25 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0001_initial'),
+        ("productsapi", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='product',
-            name='color',
+            model_name="product",
+            name="color",
             field=models.CharField(max_length=50, null=True),
         ),
         migrations.AddField(
-            model_name='product',
-            name='slug',
+            model_name="product",
+            name="slug",
             field=models.CharField(max_length=200, null=True),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='model',
+            model_name="product",
+            name="model",
             field=models.CharField(max_length=50),
         ),
     ]

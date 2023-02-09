@@ -5,16 +5,17 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0005_alter_product_options_order'),
+        ("productsapi", "0005_alter_product_options_order"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='order',
-            name='time_created',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="order",
+            name="time_created",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
     ]

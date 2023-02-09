@@ -6,24 +6,27 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0003_remove_product_subcategory_alter_product_image'),
+        ("productsapi", "0003_remove_product_subcategory_alter_product_image"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='ProductDetails',
+            name="ProductDetails",
         ),
         migrations.AddField(
-            model_name='product',
-            name='sizes',
-            field=django.contrib.postgres.fields.ArrayField(base_field=models.FloatField(), null=True, size=None),
+            model_name="product",
+            name="sizes",
+            field=django.contrib.postgres.fields.ArrayField(
+                base_field=models.FloatField(), null=True, size=None
+            ),
         ),
         migrations.AddField(
-            model_name='product',
-            name='time_created',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="product",
+            name="time_created",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
     ]

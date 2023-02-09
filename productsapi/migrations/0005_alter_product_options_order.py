@@ -4,29 +4,36 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0004_delete_productdetails_product_sizes_and_more'),
+        ("productsapi", "0004_delete_productdetails_product_sizes_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='product',
-            options={'ordering': ['-time_created']},
+            name="product",
+            options={"ordering": ["-time_created"]},
         ),
         migrations.CreateModel(
-            name='Order',
+            name="Order",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('full_name', models.CharField(max_length=50)),
-                ('phone_number', models.CharField(max_length=20)),
-                ('email', models.CharField(max_length=70)),
-                ('country', models.CharField(max_length=20)),
-                ('city', models.CharField(max_length=30)),
-                ('address', models.CharField(max_length=50)),
-                ('total_price', models.IntegerField()),
-                ('payment_type', models.CharField(max_length=4)),
-                ('products', models.ManyToManyField(to='productsapi.product')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("full_name", models.CharField(max_length=50)),
+                ("phone_number", models.CharField(max_length=20)),
+                ("email", models.CharField(max_length=70)),
+                ("country", models.CharField(max_length=20)),
+                ("city", models.CharField(max_length=30)),
+                ("address", models.CharField(max_length=50)),
+                ("total_price", models.IntegerField()),
+                ("payment_type", models.CharField(max_length=4)),
+                ("products", models.ManyToManyField(to="productsapi.product")),
             ],
         ),
     ]

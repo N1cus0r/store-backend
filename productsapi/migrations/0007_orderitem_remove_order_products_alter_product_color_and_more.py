@@ -4,38 +4,45 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0006_order_time_created'),
+        ("productsapi", "0006_order_time_created"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='OrderItem',
+            name="OrderItem",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('slug', models.CharField(max_length=200, null=True)),
-                ('size', models.FloatField()),
-                ('price', models.IntegerField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("slug", models.CharField(max_length=200, null=True)),
+                ("size", models.FloatField()),
+                ("price", models.IntegerField()),
             ],
         ),
         migrations.RemoveField(
-            model_name='order',
-            name='products',
+            model_name="order",
+            name="products",
         ),
         migrations.AlterField(
-            model_name='product',
-            name='color',
+            model_name="product",
+            name="color",
             field=models.CharField(max_length=50),
         ),
         migrations.AlterField(
-            model_name='product',
-            name='slug',
+            model_name="product",
+            name="slug",
             field=models.CharField(max_length=200),
         ),
         migrations.AddField(
-            model_name='order',
-            name='items',
-            field=models.ManyToManyField(to='productsapi.orderitem'),
+            model_name="order",
+            name="items",
+            field=models.ManyToManyField(to="productsapi.orderitem"),
         ),
     ]

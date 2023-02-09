@@ -5,19 +5,22 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('productsapi', '0009_remove_product_sex_alter_product_slug'),
+        ("productsapi", "0009_remove_product_sex_alter_product_slug"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='order',
-            name='items',
+            model_name="order",
+            name="items",
         ),
         migrations.AddField(
-            model_name='order',
-            name='item',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='productsapi.orderitem'),
+            model_name="order",
+            name="item",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="productsapi.orderitem",
+            ),
         ),
     ]
