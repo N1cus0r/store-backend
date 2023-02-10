@@ -24,15 +24,18 @@ class GetRelatedProducts(APIView):
         brand = request.query_params.get("brand")
         slug = request.query_params.get("slug")
 
+        print(Product.objects.all())
+
         if all((category, brand, slug)):
             related_products = Product.objects.filter(
                 category=category, brand=brand
             ).exclude(slug=slug)[:12]
+            print(len(related_products))
             serializer = ProductSerializer(related_products, many=True)
 
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(
-            {"error": "Query params were not provided"},
+            {"error": "Query params were not provided entirely"},
             status=status.HTTP_400_BAD_REQUEST,
         )
 
