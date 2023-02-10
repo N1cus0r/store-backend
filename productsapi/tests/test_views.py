@@ -5,6 +5,8 @@ from django.urls import reverse
 from productsapi.models import Product, Order
 from .factories import ProductFactory, fake
 
+"""testing the retrieving of newest 12 products by providing 
+category to filter, from the API endpoint via GET request"""
 
 @pytest.mark.django_db
 def test_get_related_products_view(new_product, api_client):
@@ -37,6 +39,9 @@ def test_get_related_products_view(new_product, api_client):
     assert len(loaded_response.data) == 1
 
 
+"""testing the retrieving of last 12 products by providing 
+category to filter, from the API endpoint via GET request"""
+
 @pytest.mark.django_db
 def test_get_latest_products_view(new_product, api_client):
     ProductFactory.create_batch(size=12, category=new_product.category)
@@ -50,6 +55,8 @@ def test_get_latest_products_view(new_product, api_client):
 
     assert len(response.data) == 12
 
+"""testing the retrieving of filtered products by providing 
+fields to filter, from the API endpoint via GET request"""
 
 @pytest.mark.django_db
 def test_get_filtered_products_view(api_client):
@@ -85,6 +92,8 @@ def test_get_filtered_products_view(api_client):
 
     assert len(mixed_filter_response.data.get("results")) == 12
 
+"""testing the creation of a Product instance from
+the API endpoint via POST request"""
 
 @pytest.mark.django_db
 def test_create_product_view(new_product_form_data, api_client):
@@ -96,6 +105,8 @@ def test_create_product_view(new_product_form_data, api_client):
 
     assert Product.objects.count() == 1
 
+"""testing the creation of a Order instance from
+the API endpoint via POST request"""
 
 @pytest.mark.django_db
 def test_create_order_view(new_order_form_data, api_client):

@@ -40,7 +40,8 @@ class ImageProvider:
         file.seek(0)
         return file
 
-
+"""factory produces instances of Product model supplying 
+the necessary fields with fake data"""
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
@@ -53,7 +54,8 @@ class ProductFactory(factory.django.DjangoModelFactory):
     sizes = [fake.pyint(min_value=40, max_value=45) for _ in range(5)]
     image = ImageProvider.get_model_field_image()
 
-
+"""factory produces instances of OrderItem model supplying 
+the necessary fields with fake data"""
 class OrderItemFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = OrderItem
@@ -62,7 +64,8 @@ class OrderItemFactory(factory.django.DjangoModelFactory):
     size = fake.pyint(min_value=40, max_value=45)
     price = fake.pyint(min_value=100, max_value=1000)
 
-
+"""factory produces instances of Order model supplying 
+the necessary fields with fake data"""
 class OrderFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Order

@@ -2,7 +2,8 @@ from rest_framework import serializers
 
 from .models import Product, Order, OrderItem
 
-
+'''serializes the Product instance and generates 
+a custom slug when instance created'''
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         image = serializers.ImageField()
@@ -31,13 +32,14 @@ class ProductSerializer(serializers.ModelSerializer):
         validated_data["slug"] = self.create_slug(validated_data)
         return super().create(validated_data)
 
-
+# serializes the OrderItem instance
 class OrderItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = ["slug", "size", "price"]
 
-
+'''creates an Order instance and a OrderItem instance 
+then populates total_price field with OrderItem price'''
 class CreateOrderSerializer(serializers.ModelSerializer):
     item = OrderItemSerializer()
 

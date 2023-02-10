@@ -2,6 +2,8 @@ from django.core.validators import FileExtensionValidator
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
+# return the path where the product image will be stored
+
 
 def get_upload_path(instance, filename):
     return f"products/{instance.slug}" + "." + filename.split(".")[-1]
@@ -21,11 +23,15 @@ class Product(models.Model):
     time_created = models.DateTimeField(auto_now_add=True)
     sizes = ArrayField(models.CharField(max_length=4), null=True, blank=True)
 
+    # slug being created from joining (brand, model, color) with "-"
+
     def create_slug(self):
         slug_lst = []
         for field in (self.brand, self.model, self.color):
             slug_lst.extend(list(map(lambda x: x.lower(), field.split())))
         return "-".join(slug_lst)
+
+    # if the model was not created yet then generate slug
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -53,12 +59,15 @@ class Order(models.Model):
     full_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=20)
     email = models.CharField(max_length=70)
+
     # Location
     country = models.CharField(max_length=20)
     city = models.CharField(max_length=30)
     address = models.CharField(max_length=50)
+
     # Order Items
     item = models.ForeignKey(OrderItem, on_delete=models.CASCADE, null=True)
+
     # Payment
     payment_type = models.CharField(max_length=4)
     total_price = models.IntegerField()

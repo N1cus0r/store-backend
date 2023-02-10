@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListAPIView
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.filters import SearchFilter
 
@@ -10,22 +10,23 @@ from .models import Product
 from .pagination import FilteredProductsPagination, SearchPagination
 
 
-class ProductSearch(ListCreateAPIView):
+'''provides search functionality with pagination
+of 6 objects per request''' 
+class ProductSearch(ListAPIView):
     pagination_class = SearchPagination
     serializer_class = ProductSerializer
     queryset = Product.objects.all()
     filter_backends = [SearchFilter]
     search_fields = ["slug"]
 
-
+'''this view accepts GET requests and takes brand, category
+and slug as query parameters, then return products with same
+brand and category, it excludes the product with the slug provided '''
 class GetRelatedProducts(APIView):
     def get(self, request):
         category = request.query_params.get("category")
         brand = request.query_params.get("brand")
         slug = request.query_params.get("slug")
-
-        print(Product.objects.all())
-
         if all((category, brand, slug)):
             related_products = Product.objects.filter(
                 category=category, brand=brand
@@ -39,6 +40,8 @@ class GetRelatedProducts(APIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+'''this view accept GET requests with category as query parameter
+then returns 12 newest products from same category'''
 
 class GetLatestProducts(APIView):
     def get(self, request):
@@ -52,7 +55,9 @@ class GetLatestProducts(APIView):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-
+'''this view accepts GET requests can take as query parameters
+category, brand and slug then returns object filtered
+by the parameter provided'''
 class GetFilteredProducts(APIView, FilteredProductsPagination):
     def get(self, request):
         category = request.query_params.get("category")
@@ -76,7 +81,8 @@ class GetFilteredProducts(APIView, FilteredProductsPagination):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
-
+'''this view accepts POST requests with form data
+needed to create a ProductInstance'''
 class CreateProduct(APIView):
     parser_classes = (MultiPartParser, FormParser)
 
@@ -86,7 +92,8 @@ class CreateProduct(APIView):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-
+'''this view accepts POST requests with form data
+needed to create a Order'''
 class CreateOrder(APIView):
     def post(self, request):
         serializer = CreateOrderSerializer(data=request.data)
